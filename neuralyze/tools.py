@@ -5,6 +5,7 @@ from pyhessian import hessian
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
+
 def get_hessian_max_spectrum(
     model: torch.nn.Module,
     criterion: torch.nn.Module,
@@ -31,7 +32,9 @@ def get_hessian_max_spectrum(
 
     max_eigens: list[float] = []
     for xs, ys in tqdm(train_dataloader, disable=not verbose):
-        hessian_comp = hessian(model, criterion, data=(xs, ys), weight_decay=weight_decay, cuda=cuda)
+        hessian_comp = hessian(
+            model, criterion, data=(xs, ys), weight_decay=weight_decay, cuda=cuda
+        )
         top_eigenvalues, _ = hessian_comp.eigenvalues(top_n=top_k)
         max_eigens.extend(top_eigenvalues)
     return max_eigens
