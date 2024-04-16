@@ -5,10 +5,10 @@ import torch
 import pytest
 
 
-
-
 @pytest.mark.parametrize("weight_decay", [None, 0.01])
-def test_get_hessian_max_spectrum(weight_decay: float, fx_small_dataset: DatasetMock, fx_small_model: ModelMock):
+def test_get_hessian_max_spectrum(
+    weight_decay: float, fx_small_dataset: DatasetMock, fx_small_model: ModelMock
+):
     train_dataloader = DataLoader(fx_small_dataset, batch_size=10, shuffle=True)
     top_k = 5
 

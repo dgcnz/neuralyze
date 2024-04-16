@@ -2,6 +2,7 @@ from torch.nn import Module
 from torch import Tensor
 import torch
 
+
 class DatasetMock(object):
     def __init__(
         self, input_size: int = 10, output_size: int = 2, num_samples: int = 100
