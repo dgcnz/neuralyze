@@ -2,30 +2,8 @@ from typing import Optional
 
 import torch
 from pyhessian import hessian
-from torch import Tensor
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-
-
-class L2RegularizedLossWithFrozenWeights(torch.nn.Module):
-    """
-    Wrapper for a loss function that adds L2 regularization
-    """
-
-    def __init__(
-        self, criterion: torch.nn.Module, weight_decay: float, params: list[Tensor]
-    ):
-        super().__init__()
-
-        # References for 0.5 factor:
-        # - https://discuss.pytorch.org/t/a-bug-of-pytorch-about-optim-sgd-weight-decay/55490
-        # - https://d2l.ai/chapter_linear-regression/weight-decay.html
-        self.l2_penalty = 0.5 * weight_decay * sum(param.square() for param in params)
-        self.criterion = criterion
-
-    def forward(self, *args, **kwargs):
-        return self.criterion(*args, **kwargs) + self.l2_penalty
-
 
 def get_hessian_max_spectrum(
     model: torch.nn.Module,
