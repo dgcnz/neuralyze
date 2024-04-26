@@ -22,10 +22,14 @@ class DatasetMock(object):
 class ModelMock(Module):
     def __init__(self, input_size: int = 10, output_size: int = 2):
         super().__init__()
-        self.fc = torch.nn.Linear(input_size, output_size)
-        self.relu = torch.nn.ReLU()
+        self.fc1 = torch.nn.Linear(input_size, output_size)
+        self.relu1 = torch.nn.ReLU()
+        self.fc2 = torch.nn.Linear(input_size, output_size)
+        self.relu2 = torch.nn.ReLU()
 
     def forward(self, x: Tensor):
-        x = self.fc(x)
-        x = self.relu(x)
+        x = self.fc1(x)
+        x = self.relu1(x)
+        x = self.fc2(x)
+        x = self.relu2(x)
         return x

@@ -3,11 +3,17 @@ from torch import Tensor
 import torch
 
 class DatasetMock(object):
+    data: Tensor
+    input_size: int
+    output_size: int
+    targets: Tensor
+
     def __init__(
         self, input_size: int = 10, output_size: int = 2, num_samples: int = 100
     ):
         self.input_size = input_size
         self.output_size = output_size
+        # generate highly non-linear dataset
         self.data = torch.randn(num_samples, input_size)
         self.targets = torch.randint(0, output_size, (num_samples,))
 
