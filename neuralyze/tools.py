@@ -55,5 +55,5 @@ def get_hessian_max_spectrum(
             model, criterion, data=(xs, ys), weight_decay=weight_decay, cuda=cuda
         )
         top_eigenvalues, _ = hessian_comp.eigenvalues(top_n=hessian_top_k, tol=hessian_tol, maxIter=hessian_max_iter)
-        max_eigens.extend(top_eigenvalues)
+        max_eigens.append(top_eigenvalues)
     return max_eigens
